@@ -14,7 +14,7 @@ class Result extends DetailsEntites {
   final String? businessStatus;
   final CurrentOpeningHours? currentOpeningHours;
   final EditorialSummary? editorialSummary;
-  final String? formattedAddress;
+  final String? adrAddress;
   final String? formattedPhoneNumber;
   final Geometry? geometry;
   final String? icon;
@@ -35,15 +35,14 @@ class Result extends DetailsEntites {
   final String? vicinity;
   final String? website;
   final bool? wheelchairAccessibleEntrance;
-
-  Result({
-    required String adrAddress,
+   Result({
+    required String formattedAddress,
     required List photos,
     this.addressComponents,
     this.businessStatus,
     this.currentOpeningHours,
     this.editorialSummary,
-    this.formattedAddress,
+    this.adrAddress,
     this.formattedPhoneNumber,
     this.geometry,
     this.icon,
@@ -65,7 +64,7 @@ class Result extends DetailsEntites {
     this.website,
     this.wheelchairAccessibleEntrance,
   }) : super(
-          address: adrAddress,
+          address: formattedAddress,
           photo: photos,
           placelocation: geometry!.location!,
         );
@@ -84,7 +83,7 @@ class Result extends DetailsEntites {
             ? null
             : EditorialSummary.fromJson(
                 json['editorial_summary'] as Map<String, dynamic>),
-        formattedAddress: json['formatted_address'] as String?,
+        formattedAddress: json['formatted_address'] as String,
         formattedPhoneNumber: json['formatted_phone_number'] as String?,
         geometry: json['geometry'] == null
             ? null
@@ -127,7 +126,7 @@ class Result extends DetailsEntites {
         'business_status': businessStatus,
         'current_opening_hours': currentOpeningHours?.toJson(),
         'editorial_summary': editorialSummary?.toJson(),
-        'formatted_address': formattedAddress,
+        'formatted_address': address,
         'formatted_phone_number': formattedPhoneNumber,
         'geometry': geometry?.toJson(),
         'icon': icon,

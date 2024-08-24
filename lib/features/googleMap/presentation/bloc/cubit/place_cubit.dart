@@ -3,6 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:googlemap/core/error/failure_message.dart';
+import 'package:googlemap/core/network/api_constant.dart';
+import 'package:googlemap/features/googleMap/domain/entites/details_entites.dart';
 import 'package:googlemap/features/googleMap/domain/entites/predictionsn_entites.dart';
 import 'package:googlemap/features/googleMap/domain/usecases/get_all_prediction.dart';
 import 'package:googlemap/features/googleMap/domain/usecases/get_place_details.dart';
@@ -10,9 +12,8 @@ import 'package:googlemap/features/googleMap/domain/usecases/get_place_details.d
 part 'place_state.dart';
 
 class PlaceCubit extends Cubit<PlaceState> {
-  PlaceCubit(
-     {
-      required this.getPlaceDetailsusecase,
+  PlaceCubit({
+    required this.getPlaceDetailsusecase,
     required this.getAllPredictionUseCases,
   }) : super(PlaceInitial());
   final GetAllPredictionUseCases getAllPredictionUseCases;
@@ -21,7 +22,6 @@ class PlaceCubit extends Cubit<PlaceState> {
   GoogleMapController? googleMapController;
   Set<Marker> markers = {};
 
-//  List<predictionsnEntites> predictionresult = [];
   GetAllPrediction() async {
     if (searchplacecontroller.text.isNotEmpty) {
       emit(LoadingPlace());
@@ -54,9 +54,10 @@ class PlaceCubit extends Cubit<PlaceState> {
       (r) {
         LatLng latLng = LatLng(r.placelocation.lat!, r.placelocation.lng!);
         clearResults();
-
         addmarker(latLng);
         setCameraPosition(latLng, 12);
+        toggleSheet();
+        emit(sucessplacedetails(placedetails: r));
       },
     );
   }
@@ -74,4 +75,17 @@ class PlaceCubit extends Cubit<PlaceState> {
     );
     markers.add(mymarker);
   }
+
+  bool showsheet = false;
+  void toggleSheet() {
+    showsheet = !showsheet;
+    emit(showbottomsheet());
+  }
+
+  String photoUrl({required int photowidth,required String photorefrence}) {
+    String imageurl =
+        '${ApiConstant.showphotoapi}?maxwidth=$photowidth&photoreference=$photorefrence&key=${ApiConstant.apiKey}';
+    return imageurl;
+  }
+
 }

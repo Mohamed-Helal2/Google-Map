@@ -18,15 +18,26 @@ final class SucessPlace extends PlaceState {
   List<Object> get props => [predictionentites];
   SucessPlace({required this.predictionentites});
 }
+
 final class emptysearchplace extends PlaceState {
   //final List<predictionsnEntites> predictionentites;
 
   // List<Object> get props => [predictionentites];
-  
 }
+
 final class FailurePlace extends PlaceState {
   final String errorMessage;
   @override
   List<Object> get props => [errorMessage];
   FailurePlace({required this.errorMessage});
+}
+
+final class showbottomsheet extends PlaceState {}
+
+final class sucessplacedetails extends PlaceState {
+  final DetailsEntites placedetails;
+ @override
+  List<Object> get props => [placedetails];
+  sucessplacedetails({required this.placedetails});
+  
 }
