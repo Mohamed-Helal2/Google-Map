@@ -46,6 +46,8 @@ flutter:
 
   assets:
     - assets/photo/
+    - assets/mapstylephoto/
+    - assets/mapstylejson/
 
 
   # fonts:

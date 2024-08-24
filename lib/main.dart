@@ -16,15 +16,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return   ScreenUtilInit(
+    return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           home: BlocProvider<PlaceCubit>(
-            create: (_) =>  getit.getit<PlaceCubit>(),
-            child:const GoogleMapScreen(),
+            create: (_) => getit.getit<PlaceCubit>(),
+            child: const GoogleMapScreen(),
           )),
     );
   }

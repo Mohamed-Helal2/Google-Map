@@ -36,8 +36,17 @@ final class showbottomsheet extends PlaceState {}
 
 final class sucessplacedetails extends PlaceState {
   final DetailsEntites placedetails;
- @override
+  @override
   List<Object> get props => [placedetails];
   sucessplacedetails({required this.placedetails});
-  
+}
+
+final class MapStyleState extends PlaceState {
+  final String stylejson;
+  final int indexstyle;
+
+  MapStyleState({required this.stylejson, required this.indexstyle});
+
+  @override
+  List<Object> get props => [indexstyle, stylejson];
 }

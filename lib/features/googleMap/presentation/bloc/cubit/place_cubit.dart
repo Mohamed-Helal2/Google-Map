@@ -82,10 +82,24 @@ class PlaceCubit extends Cubit<PlaceState> {
     emit(showbottomsheet());
   }
 
-  String photoUrl({required int photowidth,required String photorefrence}) {
+  String photoUrl({required int photowidth, required String photorefrence}) {
     String imageurl =
         '${ApiConstant.showphotoapi}?maxwidth=$photowidth&photoreference=$photorefrence&key=${ApiConstant.apiKey}';
     return imageurl;
   }
 
+  // MapType mapType = MapType.normal;
+  int myindexstyle = 0;
+  String? mapstyle;
+  mapStyle(
+      {required String stylejson,
+      required BuildContext context,
+      required int indexstyle}) async {
+    var style = await DefaultAssetBundle.of(context).loadString(stylejson);
+    mapstyle = style;
+    myindexstyle = indexstyle;
+    print(">>> ------ ${myindexstyle}");
+    emit(MapStyleState(stylejson: mapstyle!, indexstyle: myindexstyle));
+    print(">>> New index style: $myindexstyle");
+  }
 }

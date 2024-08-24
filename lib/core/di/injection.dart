@@ -20,6 +20,7 @@ Future<void> SetGetit() async {
      
     ),
   );
+ 
   // usecases
 
   getit.registerLazySingleton(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:googlemap/features/googleMap/presentation/bloc/cubit/place_cubit.dart';
+import 'package:googlemap/features/googleMap/presentation/widget/map_style/map_style_widget.dart';
 import 'package:googlemap/features/googleMap/presentation/widget/search_place_widget/location_photo.dart';
 
 import '../widget/search_place_widget/textfieldsearch_widget.dart';
@@ -19,6 +20,8 @@ class GoogleMapScreen extends StatelessWidget {
             return Stack(
               children: [
                 GoogleMap(
+                  mapType: MapType.normal,
+                  style: context.read<PlaceCubit>().mapstyle,
                   zoomControlsEnabled: false,
                   markers: context.read<PlaceCubit>().markers,
                   initialCameraPosition: const CameraPosition(
@@ -26,6 +29,7 @@ class GoogleMapScreen extends StatelessWidget {
                       zoom: 12),
                   onMapCreated: (controller) {
                     context.read<PlaceCubit>().googleMapController = controller;
+                    
                   },
                 ),
                 TextfieldsearchWidget(),
@@ -43,6 +47,7 @@ class GoogleMapScreen extends StatelessWidget {
                     child: const Text("TEST"),
                   ),
                 ),
+                const MapStyleWidget(),
                 if (state is sucessplacedetails) placePhoto(state: state),
               ],
             );
