@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:googlemap/core/error/failure_message.dart';
 import 'package:googlemap/core/network/api_constant.dart';
 import 'package:googlemap/features/googleMap/domain/entites/details_entites.dart';
 import 'package:googlemap/features/googleMap/domain/entites/predictionsn_entites.dart';
+import 'package:googlemap/features/googleMap/domain/usecases/ge_my_location.dart';
 import 'package:googlemap/features/googleMap/domain/usecases/get_all_prediction.dart';
 import 'package:googlemap/features/googleMap/domain/usecases/get_place_details.dart';
 
@@ -13,11 +16,13 @@ part 'place_state.dart';
 
 class PlaceCubit extends Cubit<PlaceState> {
   PlaceCubit({
+    required this.getMyLocationUseCase,
     required this.getPlaceDetailsusecase,
     required this.getAllPredictionUseCases,
   }) : super(PlaceInitial());
   final GetAllPredictionUseCases getAllPredictionUseCases;
   final GetPlaceDetailsusecase getPlaceDetailsusecase;
+  final GetMyLocationUseCase getMyLocationUseCase;
   TextEditingController searchplacecontroller = TextEditingController();
   GoogleMapController? googleMapController;
   Set<Marker> markers = {};
@@ -88,7 +93,6 @@ class PlaceCubit extends Cubit<PlaceState> {
     return imageurl;
   }
 
-  // MapType mapType = MapType.normal;
   int myindexstyle = 0;
   String? mapstyle;
   mapStyle(
@@ -98,8 +102,22 @@ class PlaceCubit extends Cubit<PlaceState> {
     var style = await DefaultAssetBundle.of(context).loadString(stylejson);
     mapstyle = style;
     myindexstyle = indexstyle;
-    print(">>> ------ ${myindexstyle}");
     emit(MapStyleState(stylejson: mapstyle!, indexstyle: myindexstyle));
-    print(">>> New index style: $myindexstyle");
+  }
+
+  GetMyLocation() async {
+    emit(LoadingLocation());
+    final response = await getMyLocationUseCase.getMyLocation();
+    response.fold(
+      (l) {
+        emit(failureLocationstate(error_message: mapFailutrToMessage(l)));
+      },
+      (r) {
+        LatLng latLng = LatLng(r.latitude!, r.longitude!);
+        addmarker(latLng);
+        setCameraPosition(latLng, 12);
+        emit(SucessLocationState());
+      },
+    );
   }
 }

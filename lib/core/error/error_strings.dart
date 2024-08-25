@@ -3,5 +3,6 @@ class ErrorStrings {
   static const String offline_message = 'please check Your Internt';
   static const String unDefinedplace = 'this Place Not exist';
   static const String zero_result = 'ZERO_RESULTS';
-  static const String invalid_request ='INVALID_REQUEST';
+  static const String invalid_request = 'INVALID_REQUEST';
+  static const String service_failure_message = 'Please accept get your Location';
 }

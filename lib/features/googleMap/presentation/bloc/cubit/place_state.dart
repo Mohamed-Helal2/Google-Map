@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 part of 'place_cubit.dart';
 
 sealed class PlaceState extends Equatable {
@@ -16,7 +18,7 @@ final class SucessPlace extends PlaceState {
 
   @override
   List<Object> get props => [predictionentites];
-  SucessPlace({required this.predictionentites});
+  const SucessPlace({required this.predictionentites});
 }
 
 final class emptysearchplace extends PlaceState {
@@ -29,7 +31,7 @@ final class FailurePlace extends PlaceState {
   final String errorMessage;
   @override
   List<Object> get props => [errorMessage];
-  FailurePlace({required this.errorMessage});
+  const FailurePlace({required this.errorMessage});
 }
 
 final class showbottomsheet extends PlaceState {}
@@ -38,15 +40,31 @@ final class sucessplacedetails extends PlaceState {
   final DetailsEntites placedetails;
   @override
   List<Object> get props => [placedetails];
-  sucessplacedetails({required this.placedetails});
+  const sucessplacedetails({required this.placedetails});
 }
 
 final class MapStyleState extends PlaceState {
   final String stylejson;
   final int indexstyle;
 
-  MapStyleState({required this.stylejson, required this.indexstyle});
+  const MapStyleState({required this.stylejson, required this.indexstyle});
 
   @override
   List<Object> get props => [indexstyle, stylejson];
+}
+
+final class LoadingLocation extends PlaceState{
+
+}
+final class failureLocationstate extends PlaceState {
+  final String error_message;
+  @override
+  List<Object> get props => [error_message];
+  const failureLocationstate({required this.error_message});
+}
+
+final class SucessLocationState extends PlaceState {
+  
+    @override
+      List<Object> get props => [ ];
 }

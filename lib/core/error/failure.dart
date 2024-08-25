@@ -16,3 +16,12 @@ class UnDefinedCityFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class LocationServiceFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
+class LocationPermissionFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}
