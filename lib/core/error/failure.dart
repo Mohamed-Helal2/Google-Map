@@ -25,3 +25,8 @@ class LocationPermissionFailure extends Failure {
   @override
   List<Object?> get props => [];
 }
+
+class RoutesFailure extends Failure {
+  @override
+  List<Object?> get props => [];
+}

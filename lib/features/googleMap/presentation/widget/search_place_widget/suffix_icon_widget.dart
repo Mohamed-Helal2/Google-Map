@@ -12,8 +12,6 @@ class suffixiconwidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PlaceCubit, PlaceState>(
       builder: (context, state) {
-        print(
-            "tt ----- ${context.read<PlaceCubit>().searchplacecontroller.text.isNotEmpty}");
         if (state is LoadingPlace) {
           return Container(
             margin: const EdgeInsets.all(10),

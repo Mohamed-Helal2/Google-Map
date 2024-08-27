@@ -2,7 +2,6 @@ import 'package:googlemap/core/error/error_strings.dart';
 import 'package:googlemap/core/error/failure.dart';
 
 String mapFailutrToMessage(Failure failure) {
-  print("t ----${failure.runtimeType}");
   switch (failure.runtimeType) {
     case ServerFailure:
       return ErrorStrings.server_Message;
@@ -14,6 +13,8 @@ String mapFailutrToMessage(Failure failure) {
       return ErrorStrings.service_failure_message;
     case LocationPermissionFailure:
       return ErrorStrings.service_failure_message;
+    case RoutesFailure:
+      return ErrorStrings.routes_failure_message;
     default:
       return 'Un Expected Error';
   }

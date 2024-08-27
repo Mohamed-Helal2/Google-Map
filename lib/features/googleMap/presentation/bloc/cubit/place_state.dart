@@ -22,9 +22,6 @@ final class SucessPlace extends PlaceState {
 }
 
 final class emptysearchplace extends PlaceState {
-  //final List<predictionsnEntites> predictionentites;
-
-  // List<Object> get props => [predictionentites];
 }
 
 final class FailurePlace extends PlaceState {
@@ -53,9 +50,8 @@ final class MapStyleState extends PlaceState {
   List<Object> get props => [indexstyle, stylejson];
 }
 
-final class LoadingLocation extends PlaceState{
+final class LoadingLocation extends PlaceState {}
 
-}
 final class failureLocationstate extends PlaceState {
   final String error_message;
   @override
@@ -64,7 +60,54 @@ final class failureLocationstate extends PlaceState {
 }
 
 final class SucessLocationState extends PlaceState {
-  
-    @override
-      List<Object> get props => [ ];
+  @override
+  List<Object> get props => [];
 }
+
+final class showRoutingWidgetstate extends PlaceState {
+  final bool showroutingwidget;
+
+  showRoutingWidgetstate({required this.showroutingwidget});
+  @override
+  List<Object> get props => [showroutingwidget];
+}
+
+final class LoadingRoutestate extends PlaceState {
+  @override
+  List<Object> get props => [];
+}
+
+final class SucessRoueState extends PlaceState {
+  @override
+  List<Object> get props => [];
+}
+final class Sucessoriginstate extends PlaceState {
+  final List<predictionsnEntites> predictionentites;
+
+  @override
+  List<Object> get props => [predictionentites];
+  const Sucessoriginstate({required this.predictionentites});
+}
+
+final class Sucessdestinationstate extends PlaceState {
+  final List<predictionsnEntites> predictionentites;
+
+  @override
+  List<Object> get props => [predictionentites];
+  const Sucessdestinationstate({required this.predictionentites});
+}
+
+final class firstRouteState extends PlaceState {
+  @override
+  List<Object> get props => [];
+}
+
+final class failureRoutingState extends PlaceState {
+  final String errorMessage;
+
+  failureRoutingState({required this.errorMessage});
+  @override
+  List<Object> get props => [errorMessage];
+}
+
+final class markerroutesucess extends PlaceState {}

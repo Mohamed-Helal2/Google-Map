@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:googlemap/features/googleMap/presentation/widget/search_place_widget/search_text_rich.dart';
 
 import '../../bloc/cubit/place_cubit.dart';
-import 'search_text_rich.dart';
-
-class sucessresultwidget extends StatelessWidget {
-  const sucessresultwidget({super.key, required this.state});
-  final SucessPlace state;
+class SucessOriginWidget extends StatelessWidget {
+  const SucessOriginWidget({super.key, required this.state});
+  final Sucessoriginstate state;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,8 +19,10 @@ class sucessresultwidget extends StatelessWidget {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              context.read<PlaceCubit>().GetPlaceDetails(
-                  placeid: state.predictionentites[index].place_id);
+                  context.read<PlaceCubit>().getoriginAndDestination(
+                  placeid: state.predictionentites[index].place_id, id: 0);
+              // context.read<PlaceCubit>().GetPlaceDetails(
+              //     placeid: state.predictionentites[index].place_id);
             },
             leading: Container(
               padding: const EdgeInsets.all(1),
@@ -33,7 +34,7 @@ class sucessresultwidget extends StatelessWidget {
             title: SearchTextRichtest(
                 searchword: context
                     .read<PlaceCubit>()
-                    .searchplacecontroller
+                    .origincontroller
                     .text
                     .toLowerCase()
                     .split(' ')
@@ -58,11 +59,4 @@ class sucessresultwidget extends StatelessWidget {
   }
 }
 
-class sucess_result_widget extends StatelessWidget {
-  const sucess_result_widget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
+ 

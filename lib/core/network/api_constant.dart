@@ -5,4 +5,6 @@ class ApiConstant {
   static const String placedetails = '${placeapi}details/json';
   static const showphotoapi =
       'https://maps.googleapis.com/maps/api/place/photo';
+        static const routesapi =
+      'https://routes.googleapis.com/directions/v2:computeRoutes';
 }

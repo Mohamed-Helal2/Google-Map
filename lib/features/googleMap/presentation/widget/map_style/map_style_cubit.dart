@@ -23,7 +23,6 @@ class map_style_cubit extends StatelessWidget {
       builder: (context, state) {
         return BlocBuilder<PlaceCubit, PlaceState>(
           builder: (context, state) {
-            print("buider ----------------------");
             return Container(
               height: 70,
               width: 70,

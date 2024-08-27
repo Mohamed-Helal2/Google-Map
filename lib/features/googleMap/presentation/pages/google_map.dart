@@ -4,6 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:googlemap/features/googleMap/presentation/bloc/cubit/place_cubit.dart';
 import 'package:googlemap/features/googleMap/presentation/widget/map_style/map_style_widget.dart';
 import 'package:googlemap/features/googleMap/presentation/widget/my_location/my_location_widget.dart';
+import 'package:googlemap/features/googleMap/presentation/widget/routing/routin_search.dart';
+import 'package:googlemap/features/googleMap/presentation/widget/routing/routing_widget.dart';
 import 'package:googlemap/features/googleMap/presentation/widget/search_place_widget/location_photo.dart';
 
 import '../widget/search_place_widget/textfieldsearch_widget.dart';
@@ -25,32 +27,21 @@ class GoogleMapScreen extends StatelessWidget {
                   style: context.read<PlaceCubit>().mapstyle,
                   zoomControlsEnabled: false,
                   markers: context.read<PlaceCubit>().markers,
+                  polylines: context.read<PlaceCubit>().polylines,
                   initialCameraPosition: const CameraPosition(
                       target: LatLng(30.55497584959975, 31.38114948515961),
                       zoom: 12),
                   onMapCreated: (controller) {
                     context.read<PlaceCubit>().googleMapController = controller;
-                    
                   },
                 ),
-                TextfieldsearchWidget(),
-                // Positioned(
-                //   bottom: 20,
-                //   right: 10,
-                //   left: 10,
-                //   child: MaterialButton(
-                //     onPressed: () {
-                //       // context.read<PlaceCubit>().GetAllPrediction(city: "cairo")[0];
-                //       // print(
-                //       //     "--- ${context.read<PlaceCubit>().GetAllPrediction(city: "cairo")}");
-                //     },
-                //     color: Colors.red,
-                //     child: const Text("TEST"),
-                //   ),
-               // ),
-               const MyLocationWidget(),
+                const MyLocationWidget(),
+                const RoutingWidget(),
                 const MapStyleWidget(),
                 if (state is sucessplacedetails) placePhoto(state: state),
+                context.read<PlaceCubit>().showRoutingWidget
+                    ? RoutinSearch()
+                    : TextfieldsearchWidget(),
               ],
             );
           },

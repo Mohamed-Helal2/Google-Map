@@ -11,8 +11,7 @@ final String message;
   @override
   Widget build(BuildContext context) {
     return Container(
-      //height: 100,
-      width: 240.w,
+       width: 240.w,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(50)),
           color: Color(0xff2D2D37)),
